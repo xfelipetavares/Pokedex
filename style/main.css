@@ -26,7 +26,7 @@ main {
     position: absolute;
     bottom: 55%;
     left: 50%;
-    transform: translate(-63%, 20%);
+    transform: translate(-50%, 20%);
     height: 18%;
 }
 .pokemon__data {
