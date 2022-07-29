@@ -2,26 +2,66 @@ const pokemonName = document.querySelector(`.pokemon__name`)
 const pokemonNumber = document.querySelector(`.pokemon__number`)
 const pokemonImage = document.querySelector(`.pokemon__image`)
 
-// let buttonPrev = document.getElementsByClassName(`btn-prev`)
+const form = document.querySelector(`.form`)
+const inputSearch = document.querySelector(`.input__search`)
+const buttonPrev = document.querySelector(`.btn-prev`)
+const buttonNext = document.querySelector(`.btn-next`)
+
 let pokemonId = 1
 
 const fetchPokemon = async (pokemon) => {
+    pokemonName.innerHTML = `Searching...`
+    pokemonNumber.innerHTML = ``
+
     const APIResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
-
-    const data = await APIResponse.json()
-
-    return data
+    if (APIResponse.status === 200) {
+        const data = await APIResponse.json()
+        return data
+    }
 }
 
 const renderPokemon = async (pokemon) => {
     const data = await fetchPokemon(pokemon)
-
-    pokemonName.innerHTML = data.name
-    pokemonNumber.innerHTML = data.id
-    pokemonImage.src = data.sprites.versions[`generation-v`][`black-white`].animated.front_default
-    // pokemonImage.src = data.sprites.versions[`generation-v`][`black-white`].animated.front_shiny
-
+    if (data) {
+        pokemonImage.style.display = `block`
+        pokemonName.innerHTML = data.name
+        pokemonNumber.innerHTML = data.id
+        pokemonImage.src = data.sprites.versions[`generation-v`][`black-white`].animated.front_default
+        // pokemonImage.src = data.sprites.versions[`generation-v`][`black-white`].animated.front_shiny
+        inputSearch.value = ``
+        pokemonId = data.id
+    } else {
+        pokemonImage.style.display = `none`
+        pokemonName.innerHTML = `Not Found &#128546;`
+        pokemonNumber.innerHTML = ``
+    }
 }
 
+form.addEventListener(`submit`, (event) => {
+    if(inputSearch.value == 2424){
+        event.preventDefault()
+        betao()
+    } else {
+        event.preventDefault()
+        renderPokemon(inputSearch.value.toLowerCase())
+    }
+})
 
-renderPokemon(`1`)
+
+buttonPrev.addEventListener(`click`, () => {
+    if(pokemonId > 1){
+        pokemonId --
+        renderPokemon(pokemonId)
+    }
+})
+buttonNext.addEventListener(`click`, () => {
+    pokemonId ++
+    renderPokemon(pokemonId)
+})
+
+function betao() {
+    pokemonImage.src = `assets/betao.png`
+    pokemonName.innerHTML = `MuskitoPirokin`
+    pokemonNumber.innerHTML = `2424`
+}
+renderPokemon(pokemonId)
