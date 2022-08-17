@@ -31,7 +31,7 @@ const renderPokemon = async (pokemon) => {
         inputSearch.value = ``
         pokemonId = data.id
     } else {
-        pokemonImage.style.display = `none`
+        pokemonImage.src = `assets/notfound2.png`
         pokemonName.innerHTML = `Not Found &#128546;`
         pokemonNumber.innerHTML = ``
     }
@@ -41,6 +41,9 @@ form.addEventListener(`submit`, (event) => {
     if(inputSearch.value == 2424){
         event.preventDefault()
         betao()
+    } else if (inputSearch.value == 1430){
+        event.preventDefault()
+        kakuro()
     } else {
         event.preventDefault()
         renderPokemon(inputSearch.value.toLowerCase())
@@ -63,5 +66,10 @@ function betao() {
     pokemonImage.src = `assets/betao.png`
     pokemonName.innerHTML = `MuskitoPirokin`
     pokemonNumber.innerHTML = `2424`
+}
+function kakuro() {
+    pokemonImage.src = `assets/kakuro2.png`
+    pokemonName.innerHTML = `Large Kakuro`
+    pokemonNumber.innerHTML = `1430`
 }
 renderPokemon(pokemonId)
