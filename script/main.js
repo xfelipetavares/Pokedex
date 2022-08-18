@@ -41,7 +41,7 @@ form.addEventListener(`submit`, (event) => {
     if(inputSearch.value == 2424){
         event.preventDefault()
         betao()
-    } else if (inputSearch.value == 1430){
+    } else if (inputSearch.value == 1432){
         event.preventDefault()
         kakuro()
     } else {
@@ -70,6 +70,6 @@ function betao() {
 function kakuro() {
     pokemonImage.src = `assets/kakuro2.png`
     pokemonName.innerHTML = `Large Kakuro`
-    pokemonNumber.innerHTML = `1430`
+    pokemonNumber.innerHTML = `1432`
 }
 renderPokemon(pokemonId)
